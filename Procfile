@@ -1,1 +1,1 @@
-web: gunicorn project_athenas.wsgi
+web: gunicorn backend.wsgi
