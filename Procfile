@@ -1,1 +1,1 @@
-web: gunicorn Rentalizze.wsgi
+web: gunicorn project_athenas.wsgi
