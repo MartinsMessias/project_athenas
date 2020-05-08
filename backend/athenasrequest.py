@@ -86,7 +86,6 @@ def show(u, s):
         response = site.get('https://athenas.lyceum.com.br/AOnline/XSRFScript', headers=headers)
         inicio_token = response.text.find('Techne.cronos_xsrf_token="')
         token = response.text[inicio_token + 26:inicio_token + 65]
-
         headers = {
             'Connection': 'keep-alive',
             'Pragma': 'no-cache',
