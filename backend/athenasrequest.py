@@ -1,4 +1,8 @@
+from time import sleep
+
 import requests
+
+
 
 database = []
 
@@ -26,9 +30,10 @@ def show(u, p):
 
     # Requisitar infos do aluno
     data = {'_id': 'blkEscolhaAluno.drpAluno'}
-    session.headers.update({'cronos_xsrf_token': token, 'X-Requested-With': 'XMLHttpRequest', 'Connection': 'close'})
+    session.headers.update({'cronos_xsrf_token': token, 'X-Requested-With': 'XMLHttpRequest', 'Connection': 'close', 'Cache-Control': 'max-age=0, must-revalidate'})
     response = session.post('https://athenas.lyceum.com.br/AOnline/AOnline/avisos/T016D.ajax',
                             cookies=session.cookies.get_dict(), headers=session.headers, data=data)
+    print(response.headers)
 
     print('Infos do aluno...', response)
 
@@ -102,3 +107,7 @@ def show(u, p):
 
 def get_database():
     return database
+
+
+sleep(10)
+exit()
