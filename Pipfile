@@ -11,7 +11,6 @@ python_version = "3.6.9"
 [packages]
 django-heroku = "*"
 psycopg2-binary = "*"
-django-heroku = "*"
 gunicorn = "*"
 django_currentuser = "*"
 dj_database_url = "*"
