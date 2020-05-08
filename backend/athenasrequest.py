@@ -182,7 +182,8 @@ def show(u, s):
                 'situacao': situacao,
                 'notas': dados_disciplina,
             })
-    return DATABASE, data_log
+        DATABASE.append({'log': data_log})
+    return DATABASE
 
 
 

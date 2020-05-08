@@ -8,21 +8,21 @@ import asyncio
 
 
 # Create your views here.
-def index(request, database, data_log):
+def index(request, database):
     if database is not None:
-        return render(request, 'templates/index.html', {'database': database, 'datalog':data_log})
+        return render(request, 'templates/index.html', {'database': database, 'datalog':database[-1]})
     return redirect(login)
 
 
 def login(request):
     if request.method == 'POST':
-        database, data_log = athenas.show(request.POST['u'], request.POST['s'])
+        database = athenas.show(request.POST['u'], request.POST['s'])
         asyncio.sleep(5)
-        return index(request=request, database=database,data_log=data_log)
+        return index(request=request, database=database)
     return render(request, 'templates/login.html')
 
 
 def api(request, u, p):
-    dados, data_log = athenas.show(u, p)
+    dados = athenas.show(u, p)
     asyncio.sleep(1)
     return HttpResponse(dados)
