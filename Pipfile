@@ -15,5 +15,6 @@ gunicorn = "*"
 django_currentuser = "*"
 dj_database_url = "*"
 whitenoise = "*"
+requests="*"
 
 [dev-packages]
