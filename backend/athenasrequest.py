@@ -109,5 +109,3 @@ def get_database():
     return database
 
 
-sleep(10)
-exit()
