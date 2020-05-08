@@ -14,8 +14,8 @@
     </nav>
 
 </div>
- {% for dado in database %} {{ dado.id_aluno }}{% endfor %}}
-<div class="container mt-5">
+<code>{% for dado in database|slice:"0:1" %} {{ dado.info_aluno }}{% endfor %}}</code>
+<div class="container-fluid mt-2">
     <table class="table-bordered responsive-table text-light blue darken-4">
         <thead class="text-light blue darken-3">
         <tr>
@@ -28,9 +28,9 @@
 
         {% for dado in database|slice:"1:" %}
         <tr>
-            <td>{{ dado.disciplina }}</td>
-            <td>{{ dado.faltas }}/{{ dado.faltas_permitidas}}</td>
-            <td>{% for nota in dado.notas %}
+            <td>{{ dado.disciplinas.disciplina }}</td>
+            <td>{{ dado.disciplinas.faltas }}/{{ dado.disciplinas.faltas_permitidas}}</td>
+            <td>{% for nota in dado.disciplinas.notas %}
                 <table>
                     <thead>
                     <tr>
@@ -47,6 +47,7 @@
             </td>
         </tr>
         {% endfor %}
+
         </tbody>
     </table>
 </div>
