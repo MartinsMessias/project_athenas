@@ -1,6 +1,7 @@
 import requests
 
 DATABASE = []
+data_log = []
 site = requests.session()
 
 
@@ -36,6 +37,7 @@ def get_nota_disciplina(matricula, cod_disciplina, cod_turma, ano, sla, cookies_
     response_ava = requests.post('https://athenas.lyceum.com.br/AOnline/AOnline/avaliacao/T012D.ajax', headers=headers,
                                  cookies=cookies_d, data=data)
     r_ava = response_ava.json()
+    data_log.append(r_ava)
     dados = []
     for dado in r_ava['data']['records']:
         dados.append({
@@ -72,10 +74,10 @@ def show(u, s):
         }
     except IndexError:
         pass
-
+    data_log.append(cookies)
     url_login = f'https://athenas.lyceum.com.br/AOnline/web/loginsm?origem=form-aluno&url_origem=%2FAOnline%2FAOnline%2Favisos%2FT016D.tp&username={u}&password={s}'
     response = site.get(url_login, cookies=cookies)
-
+    data_log.append(response)
     if response.status_code != 200:
         print('Erro no login! \nVerifique seus dados de acesso!\nRetorno: HTTP Status ', response.status_code)
         return None
@@ -86,6 +88,7 @@ def show(u, s):
         response = site.get('https://athenas.lyceum.com.br/AOnline/XSRFScript', headers=headers)
         inicio_token = response.text.find('Techne.cronos_xsrf_token="')
         token = response.text[inicio_token + 26:inicio_token + 65]
+        data_log.append(response)
         headers = {
             'Connection': 'keep-alive',
             'Pragma': 'no-cache',
@@ -111,13 +114,14 @@ def show(u, s):
         response = requests.post('https://athenas.lyceum.com.br/AOnline/AOnline/avisos/T016D.ajax', headers=headers,
                                  cookies=cookies, data=data)
         r = response.json()
+        data_log.append(r)
         dados_aluno = r["data"]["records"][0][1]
         matricula = r['data']['records'][0][0]
         DATABASE.append({'id_aluno': dados_aluno, 'matricula': matricula})
 
         # Pegar todas as disciplinas
         headers = {
-            'Connection': 'keep-alive',
+            'Connection': 'close',
             'Pragma': 'no-cache',
             'Cache-Control': 'no-cache',
             'DNT': '1',
@@ -144,7 +148,7 @@ def show(u, s):
                                  cookies=cookies, data=data)
 
         r = response.json()
-
+        data_log.append(r)
         for data in r['data']['records']:
             disciplina = data[0].split(' - ')[1]
             aulas_previstas = data[3]
@@ -178,7 +182,7 @@ def show(u, s):
                 'situacao': situacao,
                 'notas': dados_disciplina,
             })
-    return DATABASE
+    return DATABASE, data_log
 
 
 
