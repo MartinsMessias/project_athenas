@@ -1,1 +1,1 @@
-web: gunicorn backend.wsgi
+web: gunicorn project_athenas.wsgi --log-file -
