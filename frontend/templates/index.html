@@ -4,6 +4,7 @@
 <!-- Compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <div class="navbar-fixed">
+
     <nav class="text-light blue darken-4 ">
         <div class="nav-wrapper">
             <a href="#" class="brand-logo navbar-brand center">Anota</a>
@@ -16,7 +17,7 @@
 </div>
 <code>{% for dado in database|slice:"0:1" %} {{ dado.info_aluno }}{% endfor %}}</code>
 <div class="container-fluid mt-2">
-    <table class="table-bordered responsive-table text-light blue darken-4">
+    <table class="table responsive-table text-light blue darken-4">
         <thead class="text-light blue darken-3">
         <tr>
             <th>Disciplina</th>
@@ -47,9 +48,9 @@
             </td>
         </tr>
         {% endfor %}
-
         </tbody>
     </table>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 {% endblock %}

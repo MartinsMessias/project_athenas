@@ -1,6 +1,5 @@
 import requests
 
-
 database = []
 
 
@@ -97,7 +96,6 @@ def show(u, p):
             'situacao': situacao,
             'notas': dados,
         })
-
 
     return get_database()
 
