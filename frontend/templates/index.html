@@ -1,0 +1,54 @@
+{% extends 'templates/base.html' %}
+{% block page_title %} Login {% endblock %}
+{% block content %}
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<div class="navbar-fixed">
+    <nav class="text-light blue darken-4 ">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo navbar-brand center">Anota</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/">Sair</a></li>
+            </ul>
+        </div>
+    </nav>
+
+</div>
+ {% for dado in database %} {{ dado.id_aluno }}{% endfor %}}
+<div class="container mt-5">
+    <table class="table-bordered responsive-table text-light blue darken-4">
+        <thead class="text-light blue darken-3">
+        <tr>
+            <th>Disciplina</th>
+            <th>Faltas</th>
+            <th>Notas</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for dado in database|slice:"1:" %}
+        <tr>
+            <td>{{ dado.disciplina }}</td>
+            <td>{{ dado.faltas }}/{{ dado.faltas_permitidas}}</td>
+            <td>{% for nota in dado.notas %}
+                <table>
+                    <thead>
+                    <tr>
+                        {{ nota.avaliacao }}:
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        {{nota.nota}}
+                    </tr>
+                    </tbody>
+                </table>
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+{% endblock %}
